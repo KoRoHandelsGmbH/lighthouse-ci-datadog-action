@@ -13,6 +13,10 @@ inputs:
     description:
       'Your Datadog API key. environment value DD_API_KEY is also available.'
     required: false
+  dd-app-key:
+    description:
+      'Your Datadog APP key. environment value DD_APP_KEY is also available.'
+    required: false
 
 # Define your outputs here.
 

@@ -87,15 +87,17 @@ export function generateSeries(data:LHRJSONSchemaType, tags?:string[]):v2.Metric
 }
 
 export async function submitdMetrics(
-  { data, tags, apiKey }
+  { data, tags, apiKey, appKey }
   :
-  { data:LHRJSONSchemaType, tags?:string[], apiKey?:string },
+  { data:LHRJSONSchemaType, tags?:string[], apiKey?:string, appKey?:string },
 ):Promise<void> {
   const configuration = client.createConfiguration(apiKey ? {
     authMethods: {
       apiKeyAuth: apiKey,
+      appKeyAuth: appKey
     },
   } : {});
+  configuration.setServerVariables({ site: "datadoghq.eu" });
 
   const apiInstance = new v2.MetricsApi(configuration);
 

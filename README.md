@@ -30,6 +30,7 @@ jobs:
         uses: misogihagi/lighthouse-ci-datadog-action@beta
         with:
           dd-api-key: ${{secrets.DD_API_KEY}}
+          dd-app-key: ${{secrets.DD_APP_KEY}}
 ```
 
 ## Inputs
