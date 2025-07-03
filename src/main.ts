@@ -8,12 +8,11 @@ async function retrieveData():Promise<(LHRJSONSchemaType | null)[]> {
   const jsons = await glob('./.lighthouseci/lhr*.json', {
     cwd: process.cwd()
   });
-  core.warning(`lighthouse results path ${jsons.join(', ')}`);
 
   return jsons.map((json) => {
     let data = null;
     try {
-      data = LHRJSONSchema.parse(readFileSync(json).toString());
+      data = LHRJSONSchema.parse(JSON.parse(readFileSync(json, 'utf8').toString()));
     } catch (err) {
       core.warning(`lighthouse response JSON different than expected: ${err}`);
     }
