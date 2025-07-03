@@ -7,6 +7,7 @@ import { LHRJSONSchema, type LHRJSONSchemaType } from './schema';
 async function retrieveData():Promise<(LHRJSONSchemaType | null)[]> {
   const jsons = await glob('./../../.lighthouseci/lhr*.json');
   core.warning(`lighthouse results path ${jsons.join(', ')}`);
+  core.warning(`lighthouse cwd ${process.cwd()}`);
 
   return jsons.map((json) => {
     let data = null;
