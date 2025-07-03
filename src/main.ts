@@ -5,9 +5,10 @@ import { submitdMetrics } from './lighthouse';
 import { LHRJSONSchema, type LHRJSONSchemaType } from './schema';
 
 async function retrieveData():Promise<(LHRJSONSchemaType | null)[]> {
-  const jsons = await glob('./../../.lighthouseci/lhr*.json');
+  const jsons = await glob('./.lighthouseci/lhr*.json', {
+    cwd: process.cwd()
+  });
   core.warning(`lighthouse results path ${jsons.join(', ')}`);
-  core.warning(`lighthouse cwd ${process.cwd()}`);
 
   return jsons.map((json) => {
     let data = null;
