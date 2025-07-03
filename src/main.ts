@@ -5,11 +5,12 @@ import { submitdMetrics } from './lighthouse';
 import { LHRJSONSchema, type LHRJSONSchemaType } from './schema';
 
 async function retrieveData():Promise<(LHRJSONSchemaType | null)[]> {
-  const jsons = await glob('./.lighthouseci/lhr*.json');
+  const jsons = await glob('../../.lighthouseci/lhr*.json');
 
   return jsons.map((json) => {
     let data = null;
     try {
+      core.warning(`lighthouse raw response ${readFileSync(json).toString()}`);
       data = LHRJSONSchema.parse(readFileSync(json).toString());
     } catch {
       core.warning(`lighthouse response JSON different than expected: ${json}`);
